@@ -17,8 +17,10 @@ public class Candy {
         this.name = (String) fields.get("name");
         this.energy = (int) fields.get("energy");
         this.type = (String) fields.get("type");
-        this.filling = (String) fields.get("filling");
-        this.ingredients = (HashMap<String, String>) fields.get("type"); //parser will only return HashMap<String, String>
+
+        if (fields.containsKey("filling"))
+            this.filling = (String) fields.get("filling");
+        this.ingredients = (HashMap<String, String>) fields.get("ingredients"); //parser will only return HashMap<String, String>
         this.value = (HashMap<String, Integer>) fields.get("value"); //same as above
         this.production = (String) fields.get("production");
     }

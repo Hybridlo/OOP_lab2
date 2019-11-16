@@ -10,8 +10,9 @@ class CandyTest {
     @Test
     void test_class_constructor() {
         HashMap<String, Object> fields = new HashMap<>();
+        fields.put("id", "1");
         fields.put("name", "Слівкі лінівкі вафля");
-        fields.put("energy", 420);
+        fields.put("energy", "420");
         fields.put("type", "Chocolate with filling");
         fields.put("filling", "milk cream");
 
@@ -34,8 +35,9 @@ class CandyTest {
 
         Candy candy = new Candy(fields);
 
+        assertSame("1", candy.id);
         assertSame("Слівкі лінівкі вафля", candy.name);
-        assertEquals(420, candy.energy);
+        assertSame("420", candy.energy);
         assertSame("Chocolate with filling", candy.type);
         assertSame("milk cream", candy.filling);
         assertSame("15", candy.ingredients.get("Water"));

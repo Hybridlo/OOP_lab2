@@ -37,7 +37,7 @@
                 <xs:element name="Production" type="xs:string"/>
             </xs:sequence>
             
-            <xs:attribute name="ID" type="xs:ID" use="required"/>
+            <xs:attribute name="id" type="xs:ID" use="required"/>
         </xs:complexType>
     </xs:element>
 </xs:schema>

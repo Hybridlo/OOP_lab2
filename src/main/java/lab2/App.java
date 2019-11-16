@@ -3,8 +3,20 @@
  */
 package lab2;
 
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+
 public class App {
-    public static void main(String[] args) {
-        
+    public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
+        CandySAXParser SAXParser = new CandySAXParser("candy.xml");
+        List<Candy> candies = SAXParser.getCandyList();
+        for (Candy candy : candies) {
+            candy.printFields();
+        }
     }
 }

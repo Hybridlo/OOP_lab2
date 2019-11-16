@@ -32,7 +32,7 @@ public class Candy {
         System.out.println("ID: " + id);
         System.out.println("Energy: " + energy);
         System.out.println("Type: " + type);
-        if (filling.length() > 0)
+        if (filling != null)
             System.out.println("Filling: " + filling);
         System.out.println("Ingredients");
         for (Map.Entry<String, String> entry : ingredients.entrySet()) {

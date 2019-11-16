@@ -11,7 +11,7 @@ public class CandySAXHandler extends DefaultHandler {
 
     private String thisElement;
     private List<Candy> candies = new ArrayList<>();
-    private HashMap<String,Object> fields = new HashMap<>();
+    private HashMap<String, Object> fields = new HashMap<>();
     private HashMap<String, String> ingredients = new HashMap<>();
     private HashMap<String, Integer> value = new HashMap<>();
 

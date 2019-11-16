@@ -13,7 +13,7 @@ import java.util.List;
 
 public class App {
     public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
-        CandySAXParser SAXParser = new CandySAXParser("candy.xml");
+        CandyParserInterface SAXParser = new CandyDOMParser("candy.xml");
         List<Candy> candies = SAXParser.getCandyList();
         for (Candy candy : candies) {
             candy.printFields();

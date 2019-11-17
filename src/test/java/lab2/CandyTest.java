@@ -35,18 +35,18 @@ class CandyTest {
 
         Candy candy = new Candy(fields);
 
-        assertSame("1", candy.id);
-        assertSame("Слівкі лінівкі вафля", candy.name);
-        assertSame("420", candy.energy);
-        assertSame("Chocolate with filling", candy.type);
-        assertSame("milk cream", candy.filling);
-        assertSame("15", candy.ingredients.get("Water"));
-        assertSame("30", candy.ingredients.get("Sugar"));
-        assertSame("Black chocolate", candy.ingredients.get("ChocolateType"));
-        assertSame("5", candy.ingredients.get("Vanilla"));
+        assertEquals("1", candy.id);
+        assertEquals("Слівкі лінівкі вафля", candy.name);
+        assertEquals("420", candy.energy);
+        assertEquals("Chocolate with filling", candy.type);
+        assertEquals("milk cream", candy.filling);
+        assertEquals("15", candy.ingredients.get("Water"));
+        assertEquals("30", candy.ingredients.get("Sugar"));
+        assertEquals("Black chocolate", candy.ingredients.get("ChocolateType"));
+        assertEquals("5", candy.ingredients.get("Vanilla"));
         assertEquals(15, (int) candy.value.get("Proteins"));
         assertEquals(5, (int) candy.value.get("Fat"));
         assertEquals(80, (int) candy.value.get("Carbon"));
-        assertSame("Рошен", candy.production);
+        assertEquals("Рошен", candy.production);
     }
 }

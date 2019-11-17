@@ -8,22 +8,20 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import java.io.File;
+import java.io.InputStream;
 
-class SchemaValidator {
-    static boolean validateXml(String xsdName, String xmlName) {
+final class SchemaValidator {
+    private SchemaValidator(){}
+    static boolean validateXml(String xsdName, InputStream xmlFile) {
         try {
             String language = XMLConstants.W3C_XML_SCHEMA_NS_URI;
             SchemaFactory factory = SchemaFactory.newInstance(language);
             Schema schema = factory.newSchema(new File(xsdName));
 
             Validator validator = schema.newValidator();
-            System.out.println();
-            System.out.println("Validator Class: " + validator.getClass().getName());
 
-            // preparing the XML file as a SAX source
-            SAXSource source = new SAXSource(new InputSource(new java.io.FileInputStream(xmlName)));
+            SAXSource source = new SAXSource(new InputSource(xmlFile));
 
-            // validating the SAX source against the schema
             validator.validate(source);
             return true;
 

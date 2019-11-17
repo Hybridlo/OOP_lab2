@@ -1,12 +1,9 @@
 package lab2;
 
-import javax.xml.stream.XMLEventReader;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamConstants;
-import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.*;
 import javax.xml.stream.events.*;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,10 +21,10 @@ public class CandyStAXParser implements CandyParserInterface {
         return candies;
     }
 
-    CandyStAXParser(String file) throws FileNotFoundException, XMLStreamException {
+    CandyStAXParser(InputStream file) throws XMLStreamException {
         XMLInputFactory factory = XMLInputFactory.newInstance();
         XMLEventReader eventReader =
-                factory.createXMLEventReader(new FileReader(file));
+                factory.createXMLEventReader(new InputStreamReader(file));
 
         HashMap<String, Object> fields = new HashMap<>();
         HashMap<String, String> ingredients = new HashMap<>();

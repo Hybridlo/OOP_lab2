@@ -5,8 +5,8 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 public class CandySAXParser implements CandyParserInterface {
@@ -19,11 +19,11 @@ public class CandySAXParser implements CandyParserInterface {
         return handler.getResult();
     }
 
-    CandySAXParser(String file) throws ParserConfigurationException, SAXException, IOException {
+    CandySAXParser(InputStream file) throws ParserConfigurationException, SAXException, IOException {
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser parser = factory.newSAXParser();
         handler = new CandySAXHandler();
 
-        parser.parse(new File(file), handler);
+        parser.parse(file, handler);
     }
 }

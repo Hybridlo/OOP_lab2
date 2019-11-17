@@ -3,6 +3,7 @@
  */
 package lab2;
 
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -15,8 +16,9 @@ public class App {
         String parser = args[0];
         CandyParserInterface SAXParser;
         String xmlFile = "candy.xml";
+        InputStream xmlStream = new FileInputStream(xmlFile);
 
-        if(SchemaValidator.validateXml("candy.xsd", xmlFile))
+        if(SchemaValidator.validateXml("candy.xsd", xmlStream))
             System.out.println("Validation success");
         else
         {
@@ -25,15 +27,15 @@ public class App {
         }
         switch (parser) {
             case "1":
-                SAXParser = new CandySAXParser(xmlFile);
+                SAXParser = new CandySAXParser(xmlStream);
                 System.out.println("Using SAX parser");
                 break;
             case "2":
-                SAXParser = new CandyDOMParser(xmlFile);
+                SAXParser = new CandyDOMParser(xmlStream);
                 System.out.println("Using DOM parser");
                 break;
             default:
-                SAXParser = new CandyStAXParser(xmlFile);
+                SAXParser = new CandyStAXParser(xmlStream);
                 System.out.println("Using StAX parser");
                 break;
         }

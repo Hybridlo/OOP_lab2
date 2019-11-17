@@ -14,17 +14,26 @@ public class App {
     public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException, XMLStreamException {
         String parser = args[0];
         CandyParserInterface SAXParser;
+        String xmlFile = "candy.xml";
+
+        if(SchemaValidator.validateXml("candy.xsd", xmlFile))
+            System.out.println("Validation success");
+        else
+        {
+            System.out.println("Validation failure");
+            return;
+        }
         switch (parser) {
             case "1":
-                SAXParser = new CandySAXParser("candy.xml");
+                SAXParser = new CandySAXParser(xmlFile);
                 System.out.println("Using SAX parser");
                 break;
             case "2":
-                SAXParser = new CandyDOMParser("candy.xml");
+                SAXParser = new CandyDOMParser(xmlFile);
                 System.out.println("Using DOM parser");
                 break;
             default:
-                SAXParser = new CandyStAXParser("candy.xml");
+                SAXParser = new CandyStAXParser(xmlFile);
                 System.out.println("Using StAX parser");
                 break;
         }

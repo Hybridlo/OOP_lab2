@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Candies xsi:schemaLocation="candy.xsd">
+<Candies xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="candy.xsd">
 
-<Candy id="1">
+<Candy id="ID-1">
     <Name>Slivki linivki vaflya</Name>
     <Energy>420</Energy>
     <Type filling="milk cream">Chocolate with filling</Type>
@@ -23,7 +24,7 @@
 </Candy>
 
 
-<Candy id="2">
+<Candy id="ID-2">
     <Name>Jelly</Name>
     <Energy>450</Energy>
     <Type>Jelly</Type>
@@ -45,7 +46,7 @@
 </Candy>
 
 
-<Candy id="3">
+<Candy id="ID-3">
     <Name>Kapri moloko</Name>
     <Energy>370</Energy>
     <Type>Caramel</Type>
@@ -66,7 +67,7 @@
 </Candy>
 
 
-<Candy id="4">
+<Candy id="ID-4">
     <Name>Truffle</Name>
     <Energy>440</Energy>
     <Type filling="chocolate cream">Chocolate with filling</Type>
@@ -88,7 +89,7 @@
 </Candy>
 
 
-<Candy id="5">
+<Candy id="ID-5">
     <Name>FLORENCE</Name>
     <Energy>480</Energy>
     <Type filling="chocolate cream with nut">Chocolate with filling</Type>

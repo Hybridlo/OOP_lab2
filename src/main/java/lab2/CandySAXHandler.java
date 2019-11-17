@@ -20,11 +20,6 @@ public class CandySAXHandler extends DefaultHandler {
     }
 
     @Override
-    public void startDocument(){
-        System.out.println("Start parse XML...");
-    }
-
-    @Override
     public void startElement(String namespaceURI, String localName, String qName, Attributes attrs) {
         thisElement = qName;
 
@@ -92,11 +87,10 @@ public class CandySAXHandler extends DefaultHandler {
 
             Candy candy = new Candy(fields);
             candies.add(candy);
-        }
-    }
 
-    @Override
-    public void endDocument() {
-        System.out.println("Stop parse XML...");
+            fields = new HashMap<>();
+            ingredients = new HashMap<>();
+            value = new HashMap<>();
+        }
     }
 }

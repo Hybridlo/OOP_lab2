@@ -13,7 +13,6 @@ public class CandyStAXParser implements CandyParserInterface {
 
     private List<Candy> candies = new ArrayList<>();
     private String thisElement;
-    private boolean processed = true;
 
     @Override
     public List<Candy> getCandyList()
@@ -39,7 +38,6 @@ public class CandyStAXParser implements CandyParserInterface {
                 case XMLStreamConstants.START_ELEMENT:
                     StartElement startElement = event.asStartElement();
                     thisElement = startElement.getName().getLocalPart();
-                    processed = false;
 
                     if ("Candy".equals(thisElement) || "Type".equals(thisElement)) {
                         Iterator<Attribute> attributes = startElement.getAttributes();
@@ -51,11 +49,8 @@ public class CandyStAXParser implements CandyParserInterface {
                     break;
 
                 case XMLStreamConstants.CHARACTERS:
-                    if (processed)
-                        break;
                     Characters characters = event.asCharacters();
                     String val = characters.getData();
-                    processed = true;
                     switch (thisElement) {
                         case "Name":
                             fields.put("name", val);
@@ -98,6 +93,7 @@ public class CandyStAXParser implements CandyParserInterface {
 
                 case XMLStreamConstants.END_ELEMENT:
                     EndElement endElement = event.asEndElement();
+                    thisElement = "";
 
                     if ("Candy".equals(endElement.getName().toString())) {
                         fields.put("ingredients", ingredients);

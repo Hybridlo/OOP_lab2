@@ -25,6 +25,7 @@ public class App {
             System.out.println("Validation failure");
             return;
         }
+        xmlStream = new FileInputStream(xmlFile);
         switch (parser) {
             case "1":
                 SAXParser = new CandySAXParser(xmlStream);
@@ -42,6 +43,13 @@ public class App {
         List<Candy> candies = SAXParser.getCandyList();
         for (Candy candy : candies) {
             candy.printFields();
+        }
+
+        CandyComparator candyc = new CandyComparator();
+        candies.sort(candyc);
+
+        for (Candy candy : candies) {
+            System.out.println(candy.name);
         }
     }
 }

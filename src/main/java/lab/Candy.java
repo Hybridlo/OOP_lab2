@@ -1,4 +1,4 @@
-package lab2;
+package lab;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,14 +37,14 @@ public class Candy {
         System.out.println("Ingredients");
         for (Map.Entry<String, String> entry : ingredients.entrySet()) {
             String key = entry.getKey();
-            String value = entry.getValue();
-            System.out.println("\t" + key + ": " + value);
+            String val = entry.getValue();
+            System.out.println("\t" + key + ": " + val);
         }
         System.out.println("Value");
         for (Map.Entry<String, Integer> entry : value.entrySet()) {
             String key = entry.getKey();
-            int value = entry.getValue();
-            System.out.println("\t" + key + ": " + value);
+            int val = entry.getValue();
+            System.out.println("\t" + key + ": " + val);
         }
         System.out.println("Production: " + production + '\n');
     }

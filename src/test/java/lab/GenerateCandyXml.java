@@ -1,4 +1,4 @@
-package lab2;
+package lab;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

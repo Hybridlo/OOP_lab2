@@ -1,4 +1,4 @@
-package lab2;
+package lab;
 
 import javax.xml.stream.*;
 import javax.xml.stream.events.*;
@@ -22,6 +22,7 @@ public class CandyStAXParser implements CandyParserInterface {
 
     CandyStAXParser(InputStream file) throws XMLStreamException {
         XMLInputFactory factory = XMLInputFactory.newInstance();
+        factory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
         XMLEventReader eventReader =
                 factory.createXMLEventReader(new InputStreamReader(file));
 
@@ -88,6 +89,8 @@ public class CandyStAXParser implements CandyParserInterface {
                         case "Production":
                             fields.put("production", val);
                             break;
+                        default:
+                            break;
                     }
                     break;
 
@@ -107,6 +110,8 @@ public class CandyStAXParser implements CandyParserInterface {
                         value = new HashMap<>();
                     }
 
+                    break;
+                default:
                     break;
             }
         }

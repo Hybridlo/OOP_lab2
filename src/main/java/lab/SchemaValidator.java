@@ -1,4 +1,4 @@
-package lab2;
+package lab;
 
 import org.xml.sax.InputSource;
 
@@ -19,6 +19,8 @@ final class SchemaValidator {
             Schema schema = factory.newSchema(new File(xsdName));
 
             Validator validator = schema.newValidator();
+            validator.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+            validator.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
 
             SAXSource source = new SAXSource(new InputSource(xmlFile));
 

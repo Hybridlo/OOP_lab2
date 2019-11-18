@@ -1,16 +1,14 @@
-package lab2;
+package lab;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -29,6 +27,7 @@ public class CandyDOMParser implements CandyParserInterface {
 
     CandyDOMParser(InputStream file) throws IOException, SAXException, ParserConfigurationException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document document = builder.parse(file);
 
@@ -78,6 +77,8 @@ public class CandyDOMParser implements CandyParserInterface {
                                 case "Vanilla":
                                     ingredients.put("Vanilla", ingredientChild.getTextContent());
                                     break;
+                                default:
+                                    break;
                             }
                         }
                         break;
@@ -95,11 +96,15 @@ public class CandyDOMParser implements CandyParserInterface {
                                 case "Carbon":
                                     value.put("Carbon", Integer.valueOf(valueChild.getTextContent()));
                                     break;
+                                default:
+                                    break;
                             }
                         }
                         break;
                     case "Production":
                         fields.put("production", child.getTextContent());
+                        break;
+                    default:
                         break;
                 }
             }

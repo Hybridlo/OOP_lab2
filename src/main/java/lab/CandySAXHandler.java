@@ -1,4 +1,4 @@
-package lab2;
+package lab;
 
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.*;
@@ -73,6 +73,8 @@ public class CandySAXHandler extends DefaultHandler {
                 break;
             case "Production":
                 fields.put("production", val);
+                break;
+            default:
                 break;
         }
     }

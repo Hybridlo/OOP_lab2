@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CandyDOMParser implements CandyParserInterface {
 
@@ -34,28 +35,28 @@ public class CandyDOMParser implements CandyParserInterface {
         NodeList candyElements = document.getDocumentElement().getElementsByTagName("Candy");
 
         for (int i = 0; i < candyElements.getLength(); i++) {
-            HashMap<String, Object> fields = new HashMap<>();
-            HashMap<String, String> ingredients = new HashMap<>();
-            HashMap<String, Integer> value = new HashMap<>();
+            Candy candy = new Candy();
+            Map<String, String> ingredients = new HashMap<>();
+            Map<String, Integer> value = new HashMap<>();
 
             Node candyItem = candyElements.item(i);
 
-            fields.put("id", candyItem.getAttributes().getNamedItem("id").getNodeValue());
+            candy.id = candyItem.getAttributes().getNamedItem("id").getNodeValue();
 
             NodeList candyChildren = candyItem.getChildNodes();
             for(int j = 0; j < candyChildren.getLength(); j++) {
                 Node child = candyChildren.item(j);
                 switch (child.getNodeName()) {
                     case "Name":
-                        fields.put("name", child.getTextContent());
+                        candy.name = child.getTextContent();
                         break;
                     case "Energy":
-                        fields.put("energy", child.getTextContent());
+                        candy.energy = child.getTextContent();
                         break;
                     case "Type":
-                        fields.put("type", child.getTextContent());
+                        candy.type = child.getTextContent();
                         if (child.getAttributes().getLength() > 0)
-                            fields.put("filling", child.getAttributes().getNamedItem("filling").getNodeValue());
+                            candy.filling = child.getAttributes().getNamedItem("filling").getNodeValue();
                         break;
                     case "Ingredients":
                         NodeList ingredientsChildren = child.getChildNodes();
@@ -102,16 +103,15 @@ public class CandyDOMParser implements CandyParserInterface {
                         }
                         break;
                     case "Production":
-                        fields.put("production", child.getTextContent());
+                        candy.production = child.getTextContent();
                         break;
                     default:
                         break;
                 }
             }
-            fields.put("ingredients", ingredients);
-            fields.put("value", value);
+            candy.ingredients = ingredients;
+            candy.value = value;
 
-            Candy candy = new Candy(fields);
             candies.add(candy);
         }
     }

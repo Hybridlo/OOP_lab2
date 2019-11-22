@@ -4,10 +4,7 @@ import javax.xml.stream.*;
 import javax.xml.stream.events.*;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class CandyStAXParser implements CandyParserInterface {
 
@@ -26,9 +23,10 @@ public class CandyStAXParser implements CandyParserInterface {
         XMLEventReader eventReader =
                 factory.createXMLEventReader(new InputStreamReader(file));
 
-        HashMap<String, Object> fields = new HashMap<>();
-        HashMap<String, String> ingredients = new HashMap<>();
-        HashMap<String, Integer> value = new HashMap<>();
+        Map<String, String> ingredients = new HashMap<>();
+        Map<String, Integer> value = new HashMap<>();
+
+        Candy candy = new Candy();
 
         while(eventReader.hasNext()) {
 
@@ -44,7 +42,13 @@ public class CandyStAXParser implements CandyParserInterface {
                         Iterator<Attribute> attributes = startElement.getAttributes();
                         while (attributes.hasNext()) {
                             Attribute attribute = attributes.next();
-                            fields.put(attribute.getName().toString(), attribute.getValue());
+                            switch (attribute.getName().toString()) {
+                                case "id":
+                                    candy.id = attribute.getValue();
+                                    break;
+                                case "filling":
+                                    candy.filling = attribute.getValue();
+                            }
                         }
                     }
                     break;
@@ -54,13 +58,13 @@ public class CandyStAXParser implements CandyParserInterface {
                     String val = characters.getData();
                     switch (thisElement) {
                         case "Name":
-                            fields.put("name", val);
+                            candy.name = val;
                             break;
                         case "Energy":
-                            fields.put("energy", val);
+                            candy.energy = val;
                             break;
                         case "Type":
-                            fields.put("type", val);
+                            candy.type = val;
                             break;
                         case "Water":
                             ingredients.put("Water", val);
@@ -87,7 +91,7 @@ public class CandyStAXParser implements CandyParserInterface {
                             value.put("Carbon", Integer.valueOf(val));
                             break;
                         case "Production":
-                            fields.put("production", val);
+                            candy.production = val;
                             break;
                         default:
                             break;
@@ -99,13 +103,11 @@ public class CandyStAXParser implements CandyParserInterface {
                     thisElement = "";
 
                     if ("Candy".equals(endElement.getName().toString())) {
-                        fields.put("ingredients", ingredients);
-                        fields.put("value", value);
+                        candy.ingredients = ingredients;
+                        candy.value = value;
 
-                        Candy candy = new Candy(fields);
                         candies.add(candy);
 
-                        fields = new HashMap<>();
                         ingredients = new HashMap<>();
                         value = new HashMap<>();
                     }

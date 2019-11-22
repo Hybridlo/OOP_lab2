@@ -9,12 +9,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class CandyTest {
     @Test
     void test_class_constructor() {
-        HashMap<String, Object> fields = new HashMap<>();
-        fields.put("id", "1");
-        fields.put("name", "Слівкі лінівкі вафля");
-        fields.put("energy", "420");
-        fields.put("type", "Chocolate with filling");
-        fields.put("filling", "milk cream");
+        Candy candy = new Candy();
+        candy.id = "1";
+        candy.name = "Слівкі лінівкі вафля";
+        candy.energy = "420";
+        candy.type = "Chocolate with filling";
+        candy.filling = "milk cream";
 
         HashMap<String, String> ingredients = new HashMap<>();
         ingredients.put("Water", "15");
@@ -22,18 +22,16 @@ class CandyTest {
         ingredients.put("ChocolateType", "Black chocolate");
         ingredients.put("Vanilla", "5");
 
-        fields.put("ingredients", ingredients);
+        candy.ingredients = ingredients;
 
         HashMap<String, Integer> value = new HashMap<>();
         value.put("Proteins", 15);
         value.put("Fat", 5);
         value.put("Carbon", 80);
 
-        fields.put("value", value);
+        candy.value = value;
 
-        fields.put("production", "Рошен");
-
-        Candy candy = new Candy(fields);
+        candy.production = "Рошен";
 
         assertEquals("1", candy.id);
         assertEquals("Слівкі лінівкі вафля", candy.name);

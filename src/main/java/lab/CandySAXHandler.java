@@ -6,14 +6,16 @@ import org.xml.sax.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CandySAXHandler extends DefaultHandler {
 
     private String thisElement;
     private List<Candy> candies = new ArrayList<>();
-    private HashMap<String, Object> fields = new HashMap<>();
-    private HashMap<String, String> ingredients = new HashMap<>();
-    private HashMap<String, Integer> value = new HashMap<>();
+    private Map<String, String> ingredients = new HashMap<>();
+    private Map<String, Integer> value = new HashMap<>();
+
+    private Candy candy;
 
     List<Candy> getResult() {
         return candies;
@@ -24,12 +26,21 @@ public class CandySAXHandler extends DefaultHandler {
         thisElement = qName;
 
         int attributeLength = attrs.getLength();
+        if ("Candy".equals(qName)) {
+            candy = new Candy();
+        }
         if ("Candy".equals(qName) || "Type".equals(qName)) {
             for (int i = 0; i < attributeLength; i++) {
                 // Get attribute names and values
                 String attrName = attrs.getQName(i);
                 String attrVal = attrs.getValue(i);
-                fields.put(attrName, attrVal);
+                switch (attrName) {
+                    case "id":
+                        candy.id = attrVal;
+                        break;
+                    case "filling":
+                        candy.filling = attrVal;
+                }
             }
         }
     }
@@ -39,13 +50,13 @@ public class CandySAXHandler extends DefaultHandler {
         String val = new String(ch, start, length);
         switch (thisElement) {
             case "Name":
-                fields.put("name", val);
+                candy.name = val;
                 break;
             case "Energy":
-                fields.put("energy", val);
+                candy.energy = val;
                 break;
             case "Type":
-                fields.put("type", val);
+                candy.type = val;
                 break;
             case "Water":
                 ingredients.put("Water", val);
@@ -72,7 +83,7 @@ public class CandySAXHandler extends DefaultHandler {
                 value.put("Carbon", Integer.valueOf(val));
                 break;
             case "Production":
-                fields.put("production", val);
+                candy.production = val;
                 break;
             default:
                 break;
@@ -84,13 +95,11 @@ public class CandySAXHandler extends DefaultHandler {
         thisElement = "";
 
         if ("Candy".equals(qName)) {
-            fields.put("ingredients", ingredients);
-            fields.put("value", value);
+            candy.ingredients = ingredients;
+            candy.value = value;
 
-            Candy candy = new Candy(fields);
             candies.add(candy);
 
-            fields = new HashMap<>();
             ingredients = new HashMap<>();
             value = new HashMap<>();
         }

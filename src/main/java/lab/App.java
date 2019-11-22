@@ -41,7 +41,7 @@ public class App {
         }
         List<Candy> candies = saxParser.getCandyList();
         for (Candy candy : candies) {
-            candy.printFields();
+            System.out.println(candy.toString());
         }
 
         CandyComparator candyc = new CandyComparator();

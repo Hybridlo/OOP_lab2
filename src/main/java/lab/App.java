@@ -17,10 +17,10 @@ public class App {
         InputStream xmlStream = new FileInputStream(xmlFile);
 
         if(SchemaValidator.validateXml("candy.xsd", xmlStream))
-            System.out.println("Validation success");
+            Logger.log("Validation success");
         else
         {
-            System.out.println("Validation failure");
+            Logger.log("Validation failure");
             return;
         }
 
@@ -34,15 +34,15 @@ public class App {
         switch (parserType) {
             case "1":
                 parser = new GeneralSAXParser(xmlStream, interestNode);
-                System.out.println("\nUsing SAX parser\n");
+                Logger.log("\nUsing SAX parser\n");
                 break;
             case "2":
                 parser = new GeneralDOMParser(xmlStream, interestNode);
-                System.out.println("\nUsing DOM parser\n");
+                Logger.log("\nUsing DOM parser\n");
                 break;
             default:
                 parser = new GeneralStAXParser(xmlStream, interestNode);
-                System.out.println("\nUsing StAX parser\n");
+                Logger.log("\nUsing StAX parser\n");
                 break;
         }
 
@@ -50,14 +50,14 @@ public class App {
 
         List<Candy> candies = handler.parse();
         for (Candy candy : candies) {
-            System.out.println(candy.toString());
+            Logger.log(candy.toString());
         }
 
         CandyComparator candyc = new CandyComparator();
         candies.sort(candyc);
 
         for (Candy candy : candies) {
-            System.out.println(candy.name);
+            Logger.log(candy.name);
         }
     }
 }

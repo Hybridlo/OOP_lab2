@@ -28,7 +28,7 @@ final class SchemaValidator {
             return true;
 
         } catch (Exception e) {
-            System.out.println(e.toString());
+            Logger.log(e.toString());
         }
         return false;
     }

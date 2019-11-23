@@ -22,7 +22,7 @@ public class GeneralStAXParser implements GeneralParserInterface {
             try {
                 event = eventReader.nextEvent();
             } catch (XMLStreamException e) {
-                e.printStackTrace();
+                Logger.log(e.toString());
                 return null;
             }
 

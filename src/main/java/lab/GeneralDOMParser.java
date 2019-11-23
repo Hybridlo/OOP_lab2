@@ -12,16 +12,13 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings(value="unchecked")
 
 public class GeneralDOMParser implements GeneralParserInterface {
 
-    private List<Candy> candies = new ArrayList<>();
     private NodeList elementsList;
     private int elementNum = 0;
 

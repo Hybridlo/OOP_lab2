@@ -13,31 +13,31 @@ public class Candy {
     String production;
     
     public String toString() {
-        String result = "";
-        result += "Name: " + name + "\n";
-        result += "ID: " + id + "\n";
-        result += "Energy: " + energy + "\n";
-        result += "Type: " + type + "\n";
+        StringBuilder result = new StringBuilder();
+        result.append("Name: ").append(name).append("\n");
+        result.append("ID: ").append(id).append("\n");
+        result.append("Energy: ").append(energy).append("\n");
+        result.append("Type: ").append(type).append("\n");
         if (filling != null)
-            result += "Filling: " + filling + "\n";
-        result += "Ingredients\n";
+            result.append("Filling: ").append(filling).append("\n");
+        result.append("Ingredients\n");
         for (Map.Entry<String, String> entry : ingredients.entrySet()) {
             String key = entry.getKey();
             String val = entry.getValue();
-            result += "\t" + key + ": " + val + "\n";
+            result.append("\t").append(key).append(": ").append(val).append("\n");
         }
-        result += "Value" + "\n";
+        result.append("Value\n");
         for (Map.Entry<String, Integer> entry : value.entrySet()) {
             String key = entry.getKey();
             int val = entry.getValue();
-            result += "\t" + key + ": " + val + "\n";
+            result.append("\t").append(key).append(": ").append(val).append("\n");
         }
-        result += "Production: " + production + "\n";
+        result.append("Production: ").append(production).append("\n");
 
-        return result;
+        return result.toString();
     }
 
-    public boolean equals(Candy other) {
+    public boolean equalsTo(Candy other) {
         boolean isEquals = true;
         if (!this.id.equals(other.id))
             isEquals = false;

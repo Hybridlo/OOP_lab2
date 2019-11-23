@@ -30,10 +30,10 @@ class CandyTest {
 
         Candy b = GeneratorForTests.generateCandy();
 
-        assertTrue(a.equals(b));
+        assertTrue(a.equalsTo(b));
 
         a.name = "F";
 
-        assertFalse(a.equals(b));
+        assertFalse(a.equalsTo(b));
     }
 }

@@ -39,6 +39,6 @@ class CandyParserHandlerTest {
 
         Candy expected = GeneratorForTests.generateCandy();
 
-        assertTrue(expected.equals(actual));
+        assertTrue(expected.equalsTo(actual));
     }
 }

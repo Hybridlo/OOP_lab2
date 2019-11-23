@@ -1,21 +1,15 @@
 package lab;
 
 import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CandyComparatorTest {
     @Test
-    void test_candy_comparator() throws IOException, SAXException, ParserConfigurationException {
-        CandyParserInterface SAXParser = new CandySAXParser(GenerateCandyXml.generate(true, false, false));
-        Candy a = SAXParser.getCandyList().get(0);
+    void test_candy_comparator() {
+        Candy a = GeneratorForTests.generateCandy();
 
-        SAXParser = new CandySAXParser(GenerateCandyXml.generate(true, false, false));
-        Candy b = SAXParser.getCandyList().get(0);
+        Candy b = GeneratorForTests.generateCandy();
 
         CandyComparator candyc = new CandyComparator();
 

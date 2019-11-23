@@ -12,9 +12,8 @@ import java.util.List;
 
 public class App {
     public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException, XMLStreamException {
-        String parser = args[0];
-        CandyParserInterface saxParser;
         String xmlFile = "candy.xml";
+
         InputStream xmlStream = new FileInputStream(xmlFile);
 
         if(SchemaValidator.validateXml("candy.xsd", xmlStream))
@@ -24,22 +23,32 @@ public class App {
             System.out.println("Validation failure");
             return;
         }
+
+        String parserType = args[0];
+
         xmlStream = new FileInputStream(xmlFile);
-        switch (parser) {
+        String interestNode = "Candy";
+
+        GeneralParserInterface parser;
+
+        switch (parserType) {
             case "1":
-                saxParser = new CandySAXParser(xmlStream);
-                System.out.println("Using SAX parser");
+                parser = new GeneralSAXParser(xmlStream, interestNode);
+                System.out.println("\nUsing SAX parser\n");
                 break;
             case "2":
-                saxParser = new CandyDOMParser(xmlStream);
-                System.out.println("Using DOM parser");
+                parser = new GeneralDOMParser(xmlStream, interestNode);
+                System.out.println("\nUsing DOM parser\n");
                 break;
             default:
-                saxParser = new CandyStAXParser(xmlStream);
-                System.out.println("Using StAX parser");
+                parser = new GeneralStAXParser(xmlStream, interestNode);
+                System.out.println("\nUsing StAX parser\n");
                 break;
         }
-        List<Candy> candies = saxParser.getCandyList();
+
+        CandyParserHandler handler = new CandyParserHandler(parser);
+
+        List<Candy> candies = handler.parse();
         for (Candy candy : candies) {
             System.out.println(candy.toString());
         }

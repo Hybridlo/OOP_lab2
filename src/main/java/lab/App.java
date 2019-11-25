@@ -57,7 +57,7 @@ public class App {
         candies.sort(candyc);
 
         for (Candy candy : candies) {
-            Logger.log(candy.name);
+            Logger.log("\n" + candy.name);
         }
     }
 }

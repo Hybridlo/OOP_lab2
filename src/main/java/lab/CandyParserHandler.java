@@ -72,7 +72,7 @@ class CandyParserHandler {
                     case "Carbon":
                         value.put("Carbon", Integer.valueOf(val));
                         break;
-                    case "Production":      //production element is the last, according to schema
+                    case "Production":
                         candy.production = val;
                         break;
                     default:
